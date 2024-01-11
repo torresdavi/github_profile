@@ -1,0 +1,7 @@
+<div class="form-group">
+  <%= form_with url: "/search", method: :get, local: true do |form| %>
+    <%= form.label :username, "Search for GithubProfile: "%>
+    <%= form.text_field :username, class: 'form-control' %>
+    <%= form.submit "Search" %>
+  <% end %>
+</div>
