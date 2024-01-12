@@ -1,2 +1,15 @@
 <div class="container">
+  <span>Login: <%= @result[:login] %></span>
+  <br>
+  <span>Nome: <%= @result[:name] %></span>
+  <br>
+  <span>Foto de perfil: <%= image_tag(@result[:avatar_url]) %></span>
+  <br>
+  <span>Seguidores: <%= @result[:followers] %></span>
+  <br>
+  <span>Seguindo: <%= @result[:following] %></span>
+  <br>
+  <span>Repositórios Púlbicos: <%= @result[:public_repos] %></span>
+  <br>
+  <span>Localização: <%= @result[:location] %></span>
 </div>
