@@ -2,16 +2,14 @@ class GithubController < ApplicationController
   def index; end
 
   def search
-    result = GithubProfileApi.search_by_user_name(search_params[:username])
-
-    serialized = ResponseGetGithubProfileSerializer.new(result).serialize
+    @result = GithubProfileApi.call(search_params[:username])
 
     respond_to do |format|
-      if result
-        format.html { render html: serialized }
+      if @result
+        format.html { render layout: false }
+        format.json { render json: @result }
       else
-        format.html
-        format.json { render json: {error => 'Deu ruim'} }
+        format.html { render html: "Erro"}
       end
     end
   end
