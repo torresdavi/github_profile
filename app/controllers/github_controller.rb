@@ -9,7 +9,7 @@ class GithubController < ApplicationController
         format.html { render layout: false }
         format.json { render json: @result }
       else
-        format.html { render html: "Erro"}
+        format.html { render html: @result.errors }
       end
     end
   end
