@@ -1,27 +1,26 @@
 class ResponseGetGithubProfileSerializer < ActiveModel::Serializer
   def serialize_primary_data
     serialize ||= {
-      login: self.object['login'],
-      name: self.object['name'],
-      avatar_url: self.object['avatar_url'],
-      followers: self.object['followers'],
-      following: self.object['following'],
-      public_repos: self.object['public_repos'],
-      location: self.object['location']
+      login: object['login'],
+      name: object['name'],
+      avatar_url: object['avatar_url'],
+      followers: object['followers'],
+      following: object['following'],
+      public_repos: object['public_repos'],
+      location: object['location']
     }
   end
 
   def serialize_repos
-    serialize ||= {}
     count = 0
 
-    self.object.parsed_response.each do |item|
-      unless count == 3
-        serialize.merge!({repo_name: item['name'], full_repo_name: item['full_name'], private: item['private']})
-
-        count += 1
-      end
+    serialize = object.parsed_response.map do |repo|
+      { repo_name: repo['name'], full_repo_name: repo['full_name'], private: repo['private'] }
     end
-    serialize
+
+    serialize = serialize.take(4).each_with_object({}) do |i, final_hash|
+      final_hash[count] = i
+      count += 1
+    end
   end
 end
