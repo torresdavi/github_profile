@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class GithubController < ApplicationController
   def index; end
 
@@ -5,11 +7,12 @@ class GithubController < ApplicationController
     @result = GithubProfileApi.call(search_params[:username])
 
     respond_to do |format|
-      if @result
+      if @result[:login]
         format.html { render layout: false }
         format.json { render json: @result }
       else
-        format.html { render html: @result.errors }
+        format.html { render layou: false }
+        format.html { render jsons: { errors: @result[:errors][:message], status: 404 }, status: 404 }
       end
     end
   end

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 require 'httparty'
 
 class GithubProfileApi
@@ -15,17 +17,21 @@ class GithubProfileApi
     primary_data.merge!(repos)
   end
 
-  private
-
   def self.primary_data(username)
     response = HTTParty.get("http://api.github.com/users/#{username}")
 
-    primary_data = ResponseGetGithubProfileSerializer.new(response).serialize_primary_data
+    if response['message'] && response['message'] == 'Not Found'
+      return { errors: { message: 'Usuário não encontrado ou inválido.' } }
+    end
+
+    ResponseGetGithubProfileSerializer.new(response).serialize_primary_data
   end
 
   def self.repos(username)
     response = HTTParty.get("https://api.github.com/users/#{username}/repos")
 
-    repos = ResponseGetGithubProfileSerializer.new(response).serialize_repos
+    return {} if response['message'] && response['message'] == 'Not Found'
+
+    ResponseGetGithubProfileSerializer.new(response).serialize_repos
   end
 end

@@ -1,28 +1,34 @@
 <div class="container">
-  <h2>Informações Principais</h2>
-  <br>
-  <span><b>Foto de perfil: </b></span>
-  <br>
-  <%= image_tag(@result[:avatar_url], size: "50x50") %>
-  <br>
-  <span><b>Login:</b> <%= @result[:login] %></span>
-  <br>
-  <span><b>Nome: </b><%= @result[:name] %></span>
-  <br>
-  <span><b>Seguidores: </b><%= @result[:followers] %></span>
-  <br>
-  <span><b>Seguindo: </b><%= @result[:following] %></span>
-  <br>
-  <span><b>Repositórios Públicos: </b><%= @result[:public_repos] %></span>
-  <br>
-  <span><b>Localização: </b><%= @result[:location] %></span>
-  <br>
-  <h2>Repositórios:</h2>
-  <span><b>Repositório 01: </b><%= @result[0][:repo_name] %> / <b>url:</b> <%= @result[0][:full_repo_name] %></span>
-  <br>
-  <span><b>Repositório 01: </b><%= @result[1][:repo_name] %> / <b>url:</b> <%= @result[1][:full_repo_name] %></span>
-  <br>
-  <span><b>Repositório 01: </b><%= @result[2][:repo_name] %> / <b>url:</b> <%= @result[2][:full_repo_name] %></span>
-  <br>
-  <span><b>Repositório 01: </b><%= @result[3][:repo_name] %> / <b>url:</b> <%= @result[3][:full_repo_name] %></span>
+  <% if !@result[:errors]%>
+    <h2>Informações Principais</h2>
+    <br>
+    <span><b>Foto de perfil: </b></span>
+    <br>
+    <%= image_tag(@result[:avatar_url], size: "50x50") %>
+    <br>
+    <span><b>Login:</b> <%= @result[:login] %></span>
+    <br>
+    <span><b>Nome: </b><%= @result[:name] %></span>
+    <br>
+    <span><b>Seguidores: </b><%= @result[:followers] %></span>
+    <br>
+    <span><b>Seguindo: </b><%= @result[:following] %></span>
+    <br>
+    <span><b>Repositórios Públicos: </b><%= @result[:public_repos] %></span>
+    <br>
+    <span><b>Localização: </b><%= @result[:location] %></span>
+    <br>
+    <h2>Repositórios:</h2>
+    <span><b>Repositório 01: </b><%= @result[0][:repo_name] %> / <b>url:</b> <%= @result[0][:full_repo_name] %></span>
+    <br>
+    <span><b>Repositório 01: </b><%= @result[1][:repo_name] %> / <b>url:</b> <%= @result[1][:full_repo_name] %></span>
+    <br>
+    <span><b>Repositório 01: </b><%= @result[2][:repo_name] %> / <b>url:</b> <%= @result[2][:full_repo_name] %></span>
+    <br>
+    <span><b>Repositório 01: </b><%= @result[3][:repo_name] %> / <b>url:</b> <%= @result[3][:full_repo_name] %></span>
+  <% else %>
+    <h2>Erro</h2>
+    <br>
+    <span><%= @result[:errors] %></span>
+  <% end %>
 </div>
