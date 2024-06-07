@@ -11,8 +11,8 @@ class GithubController < ApplicationController
         format.html { render layout: false }
         format.json { render json: @result }
       else
-        format.html { render layou: false }
-        format.html { render jsons: { errors: @result[:errors][:message], status: 404 }, status: 404 }
+        format.html { render layout: false }
+        format.json { render json: { errors: @result[:message], status: 404 }, status: 404 }
       end
     end
   end
